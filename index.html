@@ -8,17 +8,18 @@
     <style>
         html {
             height: 100%;
+            background-color: #181a1b;
         }
         body {
             height: 100%;
-            /* background-color: black; */
+            color: white;
         }
         .texts {
             height: 80%;
         }
         textarea {
-            border: solid black 2px;
-            background-color: rgb(89, 84, 78);
+            border: solid #8c8273 3px;
+            background-color: #3f4447;
             color: aliceblue;
             font-size: 1.5em;
             width: 99%;
@@ -49,11 +50,29 @@
         #errortext {
             color: maroon;
         }
+        .numinput {
+            color: white;
+            background-color: #181a1b;
+            scrollbar-arrow-color: #181a1b;
+        }
+        button {
+            background-color: #181a1b;
+            border-color: #8c8273;
+            border-radius: 15%;
+            color: white;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #807373;
+            border-color: #8c8273;
+            border-radius: 15%;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <h1>Test Array Generator</h1>
-    <hr>
+    <!-- <hr> -->
     <div class="inputbox">
         <label for="length">Array Size</label>
         <input class="numinput" type="number" pattern="[0-9]" max="999999999" min="0" name="length" id="length">
@@ -72,7 +91,7 @@
     <p id="errortext">Could Not Generate! Are inputs numerical?</p>
     <h3>Output:</h3>
     <div class="texts">
-        <textarea name="" id=""></textarea>
+        <textarea name="" id="" placeholder="Array output here..."></textarea>
     </div>
 
     
