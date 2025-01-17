@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Gen</title>
+
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+            /* background-color: black; */
+        }
+        .texts {
+            height: 80%;
+        }
+        textarea {
+            border: solid black 2px;
+            background-color: rgb(89, 84, 78);
+            color: aliceblue;
+            font-size: 1.5em;
+            width: 99%;
+            height: 35%;
+            resize: vertical;
+        }
+        aside {
+            margin: auto;
+            text-align: right;
+        }
+        a {
+            text-decoration: none;
+        }
+        h1 {
+            color: rgb(213, 210, 191);
+            font-size: 250%;
+            margin: auto;
+            text-align: center;
+        }
+        .links aside {
+            display: inline;
+            float: right;
+            margin: 0 1em 0 0;
+        }
+        .inputbox {
+            margin: 1em 0 1em 0;
+        }
+        #errortext {
+            color: maroon;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Array Generator</h1>
+    <hr>
+    <div class="inputbox">
+        <label for="length">Array Size</label>
+        <input class="numinput" type="number" pattern="[0-9]" max="999999999" min="0" name="length" id="length">
+    </div>
+
+    <div class="inputbox">
+        <label for="maxnum">Maximum Number</label>
+        <input class="numinput" type="number" pattern="[0-9]" max="999999999" min="0" name="maxnum" id="maxnum">
+    </div>
+
+    <div class="inputbox">
+        <label for="negatives">Allow Negative Numbers?</label>
+        <input type="checkbox" name="negatives" id="negatives">
+    </div>
+    <button id="generatebtn">Generate!</button>
+    <p id="errortext">Could Not Generate! Are inputs numerical?</p>
+    <h3>Output:</h3>
+    <div class="texts">
+        <textarea name="" id=""></textarea>
+    </div>
+
+    
+    
+</body>
+</html>
