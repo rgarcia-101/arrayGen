@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Array Gen</title>
+    <script src="generate.js"></script>
 
     <style>
         html {
             height: 100%;
-            background-color: #181a1b;
+            background-color: #212729;
         }
         body {
             height: 100%;
@@ -34,7 +35,7 @@
             text-decoration: none;
         }
         h1 {
-            color: rgb(213, 210, 191);
+            color: rgb(228, 227, 217);
             font-size: 250%;
             margin: auto;
             text-align: center;
@@ -48,12 +49,12 @@
             margin: 1em 0 1em 0;
         }
         #errortext {
-            color: maroon;
+            color: rgb(255, 91, 91);
         }
         .numinput {
-            color: white;
+            color: rgb(207, 202, 202);
             background-color: #181a1b;
-            scrollbar-arrow-color: #181a1b;
+            border:2px #dfdad1 solid;
         }
         button {
             background-color: #181a1b;
@@ -71,8 +72,7 @@
     </style>
 </head>
 <body>
-    <h1>Test Array Generator</h1>
-    <!-- <hr> -->
+    <h1> Array Generator</h1>
     <div class="inputbox">
         <label for="length">Array Size</label>
         <input class="numinput" type="number" pattern="[0-9]" max="999999999" min="0" name="length" id="length">
@@ -88,13 +88,17 @@
         <input type="checkbox" name="negatives" id="negatives">
     </div>
     <button id="generatebtn">Generate!</button>
-    <p id="errortext">Could Not Generate! Are inputs numerical?</p>
+    <p id="errortext"></p>
     <h3>Output:</h3>
     <div class="texts">
-        <textarea name="" id="" placeholder="Array output here..."></textarea>
+        <textarea id="outputBox" placeholder="Array output here..."></textarea>
     </div>
 
     
     
 </body>
 </html>
+
+<script type="text/javascript">
+    init();
+</script>
