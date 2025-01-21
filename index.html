@@ -47,6 +47,7 @@
         }
         .inputbox {
             margin: 1em 0 1em 0;
+            width: 20%;
         }
         #errortext {
             color: rgb(255, 91, 91);
@@ -55,6 +56,7 @@
             color: rgb(207, 202, 202);
             background-color: #181a1b;
             border:2px #dfdad1 solid;
+            width: 50%;
         }
         button {
             background-color: #181a1b;
@@ -75,11 +77,13 @@
     <h1> Array Generator</h1>
     <div class="inputbox">
         <label for="length">Array Size</label>
-        <input class="numinput" type="number" pattern="[0-9]" max="999999999" min="0" name="length" id="length">
+        <br>
+        <input class="numinput" type="number" pattern="[0-9]" placeholder="Max 2000000" max="999999999" min="0" name="length" id="length">
     </div>
 
     <div class="inputbox">
         <label for="maxnum">Maximum Number</label>
+        <br>
         <input class="numinput" type="number" pattern="[0-9]" max="999999999" min="0" name="maxnum" id="maxnum">
     </div>
 
