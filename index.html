@@ -51,6 +51,16 @@
         }
         #errortext {
             color: rgb(255, 91, 91);
+            display: inline;
+        }
+        #processtext {
+            color: rgb(147, 235, 147);
+            display: inline;
+        }
+        .responsivetext {
+            min-height: 2em;
+            margin-top: 2em;
+            margin-bottom: -1em;
         }
         .numinput {
             color: rgb(207, 202, 202);
@@ -92,7 +102,12 @@
         <input type="checkbox" name="negatives" id="negatives">
     </div>
     <button id="generatebtn">Generate!</button>
-    <p id="errortext"></p>
+
+    <div class="responsivetext">
+        <p id="errortext"></p>
+        <p id="processtext"></p>
+    </div>
+    
     <h3>Output:</h3>
     <div class="texts">
         <textarea id="outputBox" placeholder="Array output here..."></textarea>
