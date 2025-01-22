@@ -45,19 +45,16 @@ const generateArray = () => {
                     reject(Error("impropernum"));
                 } else {
                     textarea.innerHTML = "";
-                    let temp = "";
+                    let temp = [];
                     let addNeg = 0;
                     if (neg) addNeg = 0.5
-                    temp += "[";
                     for (let i = 0; i < length; i++) {
-                        temp += Math.floor((Math.random() - addNeg) * multi);
-                        if (i != length - 1) temp += ",";
+                        temp.push(Math.floor((Math.random() - addNeg) * multi));
                     }
-                    temp += "]";
-                    textarea.innerHTML = temp;
+                    textarea.innerHTML = "[" + temp.toString() + "]";
                 }
                 resolve("done");
             }
-        }, 1000);
+        }, 100);
     });
 }
