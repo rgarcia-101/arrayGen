@@ -23,6 +23,14 @@ const clicked = () => {
         process.innerHTML = "";
     }).catch(error => {
         process.innerHTML = "";
+        let msg;
+        console.log(error.message);
+        if (error.message === "impropernum") {
+            msg = "Could not generate! Are inputs non-negative and below the maximum?"
+        } else if (error.message === "nan") {
+            msg = "Could not generate! Are inputs numerical?";
+        } else msg = "Could not generate! Something went wrong."
+        err.innerHTML = msg;
     });
     btn.disabled = false;
 }
@@ -35,13 +43,11 @@ const generateArray = () => {
             let neg = document.querySelector("#negatives").checked;
             // TODO handle larger numbers
             if ((isNaN(length.value) || isNaN(multi.value)) || (length.value === "" || multi.value === "")) {
-                err.innerHTML = "Could not generate! Are inputs numerical?";
-                reject(Error("nonnum"));
+                reject(Error("nan"));
             } else {
                 length = parseInt(length.value);
                 multi = parseInt(multi.value);
                 if (((length > 2000000 || multi > 2147483647)) || (length < 0 || multi < 0)) {
-                    err.innerHTML = "Could not generate! Are inputs non-negative and below the maximum?";
                     reject(Error("impropernum"));
                 } else {
                     textarea.innerHTML = "";
