@@ -26,6 +26,12 @@ const init = () => {
 
     
     btn.addEventListener("click", clicked);
+    lengthbox.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") clicked();
+    });
+    intbox.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") clicked();
+    });
 }
 
 /**
@@ -39,6 +45,7 @@ const clicked = () => {
     .then(response => {
         textarea.innerHTML = response;
         process.innerHTML = "";
+        btn.disabled = false;
     }).catch(error => {
         process.innerHTML = "";
         let msg;
@@ -48,8 +55,9 @@ const clicked = () => {
             msg = "Could not generate! Are inputs numerical?";
         } else msg = "Could not generate! Something went wrong."
         err.innerHTML = msg;
+        btn.disabled = false;
     });
-    btn.disabled = false;
+    
 }
 
 /**
@@ -81,6 +89,7 @@ const generateArray = () => {
                     }
                     output = "[" + temp.toString() + "]";
                 }
+                if (output.length < length) reject();
                 resolve(output);
             }
         }, 100);
