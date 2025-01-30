@@ -92,6 +92,6 @@ const generateArray = () => {
                 if (output.length < length) reject();
                 resolve(output);
             }
-        }, 100);
+        }, 200);
     });
 }
