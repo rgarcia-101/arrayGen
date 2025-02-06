@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="arrays.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1> Array Generator</h1>
     <div class="inputbox">
@@ -24,6 +26,26 @@
     <div class="inputbox">
         <label for="negatives">Allow Negative Numbers?</label>
         <input type="checkbox" name="negatives" id="negatives">
+        <p>Type of array:</p>
+        <div class="radiobox">
+            <div class="radiotext">
+                <label for="rand">Random</label>
+                <input type="radio" checked class="radio" type="0" name="arrtype" id="rand">
+            </div>
+            <br>
+            <div class="radiotext">
+                <label for="asc">Ascending</label>
+                <input type="radio" class="radio" type="1" name="arrtype" id="asc">
+            </div>
+            
+            <br>
+            <div class="radiotext">
+                <label for="desc">Descending</label>
+                <input type="radio" class="radio" type="2" name="arrtype" id="desc">
+            </div>
+            
+        </div>
+
     </div>
     <button id="generatebtn">Generate!</button>
 
@@ -31,15 +53,16 @@
         <p id="errortext"></p>
         <p id="processtext"></p>
     </div>
-    
+
     <h3>Output:</h3>
     <div class="texts">
         <textarea id="outputBox" placeholder="Array output here..."></textarea>
     </div>
 
-    
-    
+
+
 </body>
+
 </html>
 
 <script type="text/javascript">

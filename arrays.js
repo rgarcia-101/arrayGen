@@ -1,3 +1,5 @@
+const MAX = 2000000;
+const MAX_INT = 2147483647;
 let textarea;
 let length;
 let multi;
@@ -6,8 +8,11 @@ let btn;
 let process;
 let lengthbox;
 let intbox;
-const MAX = 2000000;
-const MAX_INT = 2147483647;
+let randtype;
+let asctype;
+let desctype;
+let type = 0;
+
 
 
 /**
@@ -20,6 +25,11 @@ const init = () => {
     err = document.querySelector("#errortext");
     lengthbox = document.querySelector("#length");
     intbox = document.querySelector("#maxnum");
+
+    // TODO put type selectors into array for better flexibility
+    randtype = document.querySelector("#rand");
+    asctype = document.querySelector("#asc");
+    desctype = document.querySelector("#desc");
 
     lengthbox.placeholder = "Max " + MAX;
     intbox.placeholder = "Max " + MAX_INT;
@@ -71,21 +81,34 @@ const generateArray = () => {
             length = document.querySelector("#length");
             multi = document.querySelector("#maxnum");
             let neg = document.querySelector("#negatives").checked;
-
+            let type = changeType();
             // TODO handle larger numbers
             if ((isNaN(length.value) || isNaN(multi.value)) || (length.value === "" || multi.value === "")) {
                 reject(Error("nan"));
             } else {
+                // TODO organize, break into functions
                 length = parseInt(length.value);
                 multi = parseInt(multi.value);
                 if (((length > MAX || multi > MAX_INT)) || (length < 0 || multi < 0)) {
                     reject(Error("impropernum"));
                 } else {
-                    let low = neg ? multi*-1 : 0;
                     let temp = [];
+                    if (type == 1) {
+                        for (let i = 0; i <= length; i++) {
+                            temp.push(i);
+                        }
+                    }
+                    else if (type == 2) {
+                        for (let i = length; i >= 0; i--) {
+                            temp.push(i);
+                        }
+                    }
+                    else {
+                        let low = neg ? multi*-1 : 0;
 
-                    for (let i = 0; i < length; i++) {
-                        temp.push(Math.floor((Math.random() * (multi-low+1)) + low));
+                        for (let i = 0; i < length; i++) {
+                            temp.push(Math.floor((Math.random() * (multi-low+1)) + low));
+                        }
                     }
                     output = "[" + temp.toString() + "]";
                 }
@@ -94,4 +117,15 @@ const generateArray = () => {
             }
         }, 200);
     });
+}
+
+
+/**
+ * Determine the type of array to generate
+ */
+const changeType = () => {
+    if (randtype.checked) return 0;
+    else if (asctype.checked) return 1;
+    else if (desctype.checked) return 2;
+    else return 0;
 }
