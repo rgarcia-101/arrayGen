@@ -11,21 +11,25 @@
 
 <body>
     <h1> Array Generator</h1>
+
     <div class="inputbox">
-        <label for="length">Array Size</label>
+        <label for="lownum">From Number:</label>
+        <br>
+        <input class="numinput" type="number" pattern="[0-9]" max="2147483647" min="0" name="lownum" id="lownum">
+    </div>
+    <div class="inputbox">
+        <label for="highnum">To Number:</label>
+        <br>
+        <input class="numinput" type="number" pattern="[0-9]" max="2147483647" min="0" name="highnum" id="highnum">
+    </div>
+
+    <div class="inputbox">
+        <label for="length">Array Size (Random Array Only!)</label>
         <br>
         <input class="numinput" type="number" pattern="[0-9]" max="2000000" min="0" name="length" id="length">
     </div>
 
     <div class="inputbox">
-        <label for="maxnum">Maximum Number</label>
-        <br>
-        <input class="numinput" type="number" pattern="[0-9]" max="2147483647" min="0" name="maxnum" id="maxnum">
-    </div>
-
-    <div class="inputbox">
-        <label for="negatives">Allow Negative Numbers?</label>
-        <input type="checkbox" name="negatives" id="negatives">
         <p>Type of array:</p>
         <div class="radiobox">
             <div class="radiotext">

@@ -1,13 +1,12 @@
 const MAX = 2000000;
 const MAX_INT = 2147483647;
 let textarea;
-let length;
-let multi;
+let lownum;
+let highnum;
 let err;
 let btn;
 let process;
 let lengthbox;
-let intbox;
 let randtype;
 let asctype;
 let desctype;
@@ -24,7 +23,8 @@ const init = () => {
     process = document.querySelector("#processtext");
     err = document.querySelector("#errortext");
     lengthbox = document.querySelector("#length");
-    intbox = document.querySelector("#maxnum");
+    lownum = document.querySelector("#lownum");
+    highnum = document.querySelector("#highnum");
 
     // TODO put type selectors into array for better flexibility
     randtype = document.querySelector("#rand");
@@ -32,14 +32,18 @@ const init = () => {
     desctype = document.querySelector("#desc");
 
     lengthbox.placeholder = "Max " + MAX;
-    intbox.placeholder = "Max " + MAX_INT;
+    lownum.placeholder = "Max " + MAX_INT;
+    highnum.placeholder = "Max " + MAX_INT;
 
     
     btn.addEventListener("click", clicked);
     lengthbox.addEventListener("keypress", function(event) {
         if (event.key === "Enter") clicked();
     });
-    intbox.addEventListener("keypress", function(event) {
+    lownum.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") clicked();
+    });
+    highnum.addEventListener("keypress", function(event) {
         if (event.key === "Enter") clicked();
     });
 }
@@ -53,14 +57,14 @@ const clicked = () => {
     process.innerHTML = "Generating..."
     generateArray()
     .then(response => {
-        textarea.innerHTML = response;
+        textarea.value = response;
         process.innerHTML = "";
         btn.disabled = false;
     }).catch(error => {
         process.innerHTML = "";
         let msg;
         if (error.message === "impropernum") {
-            msg = "Could not generate! Are inputs non-negative and below the maximum?"
+            msg = "Could not generate! Are inputs in the valid range?"
         } else if (error.message === "nan") {
             msg = "Could not generate! Are inputs numerical?";
         } else msg = "Could not generate! Something went wrong."
@@ -78,41 +82,39 @@ const generateArray = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             let output;
-            length = document.querySelector("#length");
-            multi = document.querySelector("#maxnum");
-            let neg = document.querySelector("#negatives").checked;
+            let low = lownum.value;
+            let high = highnum.value;
+            let length = lengthbox.value;
             let type = changeType();
             // TODO handle larger numbers
-            if ((isNaN(length.value) || isNaN(multi.value)) || (length.value === "" || multi.value === "")) {
+            if ((isNaN(low) || isNaN(high) || isNaN(length)) || (low === "" || high === "" || length === "")) {
                 reject(Error("nan"));
             } else {
                 // TODO organize, break into functions
-                length = parseInt(length.value);
-                multi = parseInt(multi.value);
-                if (((length > MAX || multi > MAX_INT)) || (length < 0 || multi < 0)) {
+                low = parseInt(low);
+                high = parseInt(high);
+                length = parseInt(length);
+                if (((Math.abs(high-low) > MAX || length > MAX)) || (low > high || length < 0)) {
                     reject(Error("impropernum"));
                 } else {
                     let temp = [];
                     if (type == 1) {
-                        for (let i = 0; i <= length; i++) {
+                        for (let i = low; i <= high; i++) {
                             temp.push(i);
                         }
                     }
                     else if (type == 2) {
-                        for (let i = length; i >= 0; i--) {
+                        for (let i = high; i >= low; i--) {
                             temp.push(i);
                         }
                     }
                     else {
-                        let low = neg ? multi*-1 : 0;
-
                         for (let i = 0; i < length; i++) {
-                            temp.push(Math.floor((Math.random() * (multi-low+1)) + low));
+                            temp.push(Math.floor(Math.random() * (high - low + 1)) + low);
                         }
                     }
                     output = "[" + temp.toString() + "]";
                 }
-                if (output.length < length) reject();
                 resolve(output);
             }
         }, 200);
