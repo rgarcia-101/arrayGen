@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree Generator</title>
+    <script src="trees.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Binary Tree Generator</h1>
+    <div class="inputbox">
+        <label for="maxDepth">Max Depth:</label>
+        <br>
+        <input class="numinput" type="number" pattern="[0-9]" max="16" min="0" name="maxDepth" id="maxDepth">
+    </div>
+    <input type="button" name="btn" id="btn" value="press!">
+
+    <div class="responsivetext">
+        <p id="errortext"></p>
+        <p id="processtext"></p>
+    </div>
+
+    <p id="output"></p>
+    <h3>Output:</h3>
+    <div class="texts">
+        <textarea id="outputBox" placeholder="Array output here..."></textarea>
+    </div>
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+    init();
+</script>
