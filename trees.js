@@ -8,6 +8,7 @@ let textarea;
 let lownum;
 let highnum;
 let chance;
+let graphics;
 
 const init = () => {
     btn = document.querySelector("#btn");
@@ -17,6 +18,10 @@ const init = () => {
     lownum = document.querySelector("#lownum");
     highnum = document.querySelector("#highnum");
     chance = document.querySelector("#chance");
+    graphics = document.querySelector("#visualizer");
+    
+    // TODO update this
+    let temp = document.querySelector("#tempbtn");
     
     btn.addEventListener("click", clicked);
 }
@@ -48,9 +53,7 @@ const clicked = () => {
                 next+=2;
             } else {
                 let num = Math.floor(Math.random()*100);
-                console.log(num);
                 if (num > childChance) {
-                    console.log("null");
                     res.push("null");
                 }
                 else {
@@ -65,4 +68,51 @@ const clicked = () => {
         depth--;
     }
     textarea.value = "[" + res + ']';
+
+    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    graphics.innerHTML = "";
+    if (width > 700 && res[0] != 0) {
+        generateImage(0, 1, -1, 0, res);
+    }
+}
+
+
+
+let generateImage = (depth, pos, lastx, lasty, res, i) => {
+    let w = Math.pow(2, depth)+1;
+    w = (100/w)*pos;
+
+    let bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    let circ = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    let outer = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    let text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+
+    bg.setAttributeNS(null, "cx", w+"%");
+    bg.setAttributeNS(null, "cy", (lasty+10)+"%");
+    bg.setAttributeNS(null, "r", "50");
+    bg.setAttributeNS(null, "fill", "#212729");
+
+    circ.setAttributeNS(null, "cx", w+"%");
+    circ.setAttributeNS(null, "cy", (lasty+10)+"%");
+    circ.setAttributeNS(null, "r", "50");
+    circ.setAttributeNS(null, "stroke", "white");
+    circ.setAttributeNS(null, "stroke-width", "5");
+    circ.setAttributeNS(null, "fill", "none");
+
+    outer.setAttributeNS(null, "cx", w+"%");
+    outer.setAttributeNS(null, "cy", (lasty+10)+"%");
+    outer.setAttributeNS(null, "r", "63");
+    outer.setAttributeNS(null, "stroke", "#212729");
+    outer.setAttributeNS(null, "stroke-width", "23");
+    outer.setAttributeNS(null, "fill", "none");
+
+    text.setAttributeNS(null, "x", w+"%");
+    text.setAttributeNS(null, "y", (lasty+10)+"%");
+    text.innerHTML = res[i];
+
+    graphics.appendChild(bg);
+    graphics.appendChild(text);
+    graphics.appendChild(outer);
+    graphics.appendChild(circ);
+
 }

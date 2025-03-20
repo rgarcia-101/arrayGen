@@ -1,0 +1,33 @@
+svg {
+    border: 1px solid blue;
+    margin: auto;
+}
+svg text {
+    fill: white;
+    font-family: 'Arial', Helvetica, sans-serif;
+    font-size: 1.2em;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+.graphics {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    border: 3px solid green;
+}
+#tempbtn {
+    margin: auto;
+    text-align: center;
+}
+#hide-text {
+    visibility: hidden;
+}
+@media only screen and (max-width: 700px) {
+    #hide-text {
+        visibility: visible;
+        color: red;
+    }
+    .graphics {
+        visibility: hidden;
+    }
+  }
