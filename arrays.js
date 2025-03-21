@@ -94,7 +94,7 @@ const generateArray = () => {
                 low = parseInt(low);
                 high = parseInt(high);
                 length = parseInt(length);
-                if (((Math.abs(high-low) > MAX || length > MAX)) || (low > high || length < 0)) {
+                if (((Math.abs(high-low) > MAX || high > MAX || low < (MAX*-1) || length > MAX)) || (low > high || length < 0)) {
                     reject(Error("impropernum"));
                 } else {
                     let temp = [];
