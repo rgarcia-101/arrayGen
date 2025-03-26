@@ -1,9 +1,10 @@
 html {
     margin: auto;
+    overflow-x: hidden;
     max-width: 100%;
     max-height: 100%;
     height: 100%;
-    width: 99%;
+    width: 100%;
     background-color: #212729;
     font-size: 100%;
 }
@@ -14,11 +15,15 @@ body {
     margin: auto;
     color: white;
 }
+.content {
+    margin-left: 1em;
+    margin-right: 1em;
+}
 .texts {
     font-size: 1.25em;
     color: aliceblue;
     margin: auto;
-    height: 35%;
+    height: 8em;
     width: 100%;
 }
 #outputBox {
@@ -84,4 +89,43 @@ button:hover {
 }
 .radio {
     float: right;
+}
+
+.navbar {
+    text-align: right;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    width: 100%;
+    height: 5%;
+    border-bottom: 2px solid gray;
+    background-color: #333b3e;
+}
+.navbar h2{
+    float: left;
+    margin-left: 1em;
+}
+.navbar-nav {
+    margin-right: 3em;
+    justify-content: end;
+    align-items: baseline;
+    list-style-type: none;
+}
+.navbar-content {
+    margin-left: auto;
+}
+.navbar-nav li {
+    
+    display: inline;
+    margin-right: 6px;
+}
+.navbar-nav li a {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+.navbar-nav li a:hover {
+    color: rgb(174, 175, 176);
+    text-decoration: none;
+    text-align: center;
 }
