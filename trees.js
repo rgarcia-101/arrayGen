@@ -1,5 +1,6 @@
 const MAX = 12;
 const MAX_INT = 2147483647;
+const MAX_DEPTH = 19;
 let btn;
 let output;
 let maxdepth;
@@ -9,6 +10,8 @@ let lownum;
 let highnum;
 let chance;
 let graphics;
+let process;
+let err;
 
 const init = () => {
     btn = document.querySelector("#btn");
@@ -19,6 +22,8 @@ const init = () => {
     highnum = document.querySelector("#highnum");
     chance = document.querySelector("#chance");
     graphics = document.querySelector("#visualizer");
+    process = document.querySelector("#processtext");
+    err = document.querySelector("#errortext");
 
     // TODO update this
     // let temp = document.querySelector("#tempbtn");
@@ -29,94 +34,109 @@ const init = () => {
 
 async function clicked() {
     btn.disabled = true;
+    err.innerHTML = "";
+    process.innerHTML = "Generating...";
+
     let promise = new Promise((resolve, reject) => {
-        let depth = maxdepth.value;
-        let lowDepth = mindepth.value;
-        let low = lownum.value;
-        let high = highnum.value;
-        let childChance = chance.value;
-        if (depth === "" || childChance === "" || lowDepth === "" || high === "" || low === "") {
-            reject(1);
-        }
-        else if (isNaN(depth) || isNaN(childChance) || isNaN(lowDepth) || isNaN(high) || isNaN(low)) {
-            reject(2);
-        }
-        low = parseInt(low);
-        high = parseInt(high);
-        depth = parseInt(depth);
-        lowDepth = parseInt(lowDepth);
-        lowDepth = depth - lowDepth;
-        childChance = parseInt(childChance);
-
-        if (high > MAX_INT || low < (MAX_INT * -1) || high < low) {
-            reject(3);
-        }
-
-        let breadth = 1;
-        let next;
-        let res = [];
-        while (depth > 0 && breadth > 0) {
-            next = 0;
-            let guaranteeGen = false;
-            while (breadth > 0) {
-                // Has not reached min depth, do check
-                if (depth > lowDepth && (breadth == 1 && !guaranteeGen)) {
-                    res.push(Math.floor(Math.random() * (high - low + 1)) + low);
-                    next += 2;
-                } else {
-                    let num = Math.floor(Math.random() * 100);
-                    if (num > childChance) {
-                        res.push("null");
-                    }
-                    else {
-                        guaranteeGen = true;
-                        res.push(Math.floor(Math.random() * (high - low + 1)) + low);
-                        next += 2;
-                    }
-                }
-                breadth--;
-            }
-            breadth = next;
-            depth--;
-        }
-        textarea.value = "[" + res + ']';
-
-        let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        graphics.innerHTML = "";
-        if (width > 700 && res[0] != null) {
-            let lines = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-
-            lines.setAttributeNS(null, "id", "lines");
-            graphics.appendChild(lines);
-            let head = constructTree(res);
-
-            if (head != null) generateImage(0, 1, -1, -10, head);
-        }
+        process.innerHTML = "Generating...";
 
         setTimeout(() => {
-            resolve(0);
+            let depth = maxdepth.value;
+            let lowDepth = mindepth.value;
+            let low = lownum.value;
+            let high = highnum.value;
+            let childChance = chance.value;
+            if (depth === "" || childChance === "" || lowDepth === "" || high === "" || low === "") {
+                reject(Error("1"));
+                return;
+            }
+            else if (isNaN(depth) || isNaN(childChance) || isNaN(lowDepth) || isNaN(high) || isNaN(low)) {
+                reject(Error("2"));
+                return;
+            }
+            low = parseInt(low);
+            high = parseInt(high);
+            depth = parseInt(depth);
+            lowDepth = parseInt(lowDepth);
+            lowDepth = depth - lowDepth;
+            childChance = parseInt(childChance);
+
+            if (high > MAX_INT || low < (MAX_INT * -1) || high < low || depth < 1 || depth > MAX_DEPTH) {
+                reject(Error("3"));
+                return;
+            }
+
+            let breadth = 1;
+            let next;
+            let res = [];
+            while (depth > 0 && breadth > 0) {
+                next = 0;
+                let guaranteeGen = false;
+                while (breadth > 0) {
+                    // Has not reached min depth, do check
+                    if (depth > lowDepth && (breadth == 1 && !guaranteeGen)) {
+                        res.push(Math.floor(Math.random() * (high - low + 1)) + low);
+                        next += 2;
+                    } else {
+                        let num = Math.floor(Math.random() * 100);
+                        if (num > childChance) {
+                            res.push("null");
+                        }
+                        else {
+                            guaranteeGen = true;
+                            res.push(Math.floor(Math.random() * (high - low + 1)) + low);
+                            next += 2;
+                        }
+                    }
+                    breadth--;
+                }
+                breadth = next;
+                depth--;
+            }
+            textarea.value = "[" + res + ']';
+
+            let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            graphics.innerHTML = "";
+            if (width > 700 && res[0] != null) {
+                let lines = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+                lines.setAttributeNS(null, "id", "lines");
+                graphics.appendChild(lines);
+                let head = constructTree(res);
+
+                if (head != null) generateImage(0, 1, -1, -10, head);
+            }
+
+            process.innerHTML = "";
+            resolve("0");
+
         }, 200);
     }).catch(error => {
         // TODO make errors display on view
-        switch (error) {
-            case 1:
-                console.log("empty")
+        switch (error.message) {
+            case "1":
+                console.log("empty");
+                err.innerHTML = "Could not generate! Are inputs numerical and non-blank?"
                 break;
-            case 2:
+            case "2":
                 console.log("nan");
+                err.innerHTML = "Could not generate! Are inputs numerical and non-blank?"
                 break;
-            case 3:
+            case "3":
                 console.log("value overload");
+                err.innerHTML = "Could not generate! Inputs are either too large or too small."
                 break;
             default:
+                err.innerHTML = "Could not generate! Something went wrong."
                 console.log("how did this happen?");
                 break;
         }
+        process.innerHTML = "";
         btn.disabled = false;
     });
 
     let result = await promise;
-    if (result === 0) {
+    if (result === "0") {
         // TODO display success on view
         btn.disabled = false;
         console.log("all good");
