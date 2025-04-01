@@ -35,99 +35,95 @@ const init = () => {
     lownum.placeholder = "Max " + MAX_INT;
     highnum.placeholder = "Max " + MAX_INT;
 
-    
+
     btn.addEventListener("click", clicked);
-    lengthbox.addEventListener("keypress", function(event) {
+    lengthbox.addEventListener("keypress", function (event) {
         if (event.key === "Enter") clicked();
     });
-    lownum.addEventListener("keypress", function(event) {
+    lownum.addEventListener("keypress", function (event) {
         if (event.key === "Enter") clicked();
     });
-    highnum.addEventListener("keypress", function(event) {
+    highnum.addEventListener("keypress", function (event) {
         if (event.key === "Enter") clicked();
     });
 }
 
+
+
 /**
- * Handles generate btn click, attempts to generate array
+ * 
  */
-const clicked = () => {
+async function clicked() {
     btn.disabled = true;
     err.innerHTML = "";
-    process.innerHTML = "Generating..."
-    generateArray()
-    .then(response => {
-        textarea.value = response;
-        process.innerHTML = "";
-        btn.disabled = false;
-    }).catch(error => {
-        process.innerHTML = "";
-        let msg;
-        if (error.message === "impropernum") {
-            msg = "Could not generate! Are inputs in the valid range?"
-        } else if (error.message === "nan") {
-            msg = "Could not generate! Are inputs numerical?";
-        } else msg = "Could not generate! Something went wrong."
-        err.innerHTML = msg;
-        btn.disabled = false;
-    });
-    
-}
+    process.innerHTML = "Generating...";
 
-/**
- * Generates an array of random numbers
- * @returns resolved or rejected promise
- */
-const generateArray = () => {
-    return new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
+        process.innerHTML = "Generating...";
+
         setTimeout(() => {
             let output;
             let low = lownum.value;
             let high = highnum.value;
             let length = lengthbox.value;
-            let type = changeType();
             // TODO handle larger numbers
             if ((isNaN(low) || isNaN(high) || isNaN(length)) || (low === "" || high === "" || length === "")) {
-                reject(Error("nan"));
+                reject(Error("1"));
+                return;
             } else {
                 // TODO organize, break into functions
                 low = parseInt(low);
                 high = parseInt(high);
                 length = parseInt(length);
-                if (((Math.abs(high-low) > MAX || high > MAX || low < (MAX*-1) || length > MAX)) || (low > high || length < 0)) {
-                    reject(Error("impropernum"));
+                if (((Math.abs(high - low) > MAX || high > MAX || low < (MAX * -1) || length > MAX)) || (low > high || length < 0)) {
+                    reject(Error("2"));
+                    return;
                 } else {
                     let temp = [];
-                    if (type == 1) {
+                    if (asctype.checked) {
                         for (let i = low; i <= high; i++) {
                             temp.push(i);
                         }
-                    }
-                    else if (type == 2) {
+                    } else if (desctype.checked) {
                         for (let i = high; i >= low; i--) {
                             temp.push(i);
                         }
-                    }
-                    else {
+                    } else {
                         for (let i = 0; i < length; i++) {
                             temp.push(Math.floor(Math.random() * (high - low + 1)) + low);
                         }
                     }
+
+                    process.innerHTML = "";
                     output = "[" + temp.toString() + "]";
                 }
-                resolve(output);
+                textarea.value = output;
+                resolve("0");
             }
         }, 200);
+    }).catch(error => {
+        process.innerHTML = "";
+        switch (error.message) {
+            case "1":
+                console.log("nan/empty");
+                err.innerHTML = "Could not generate! Are inputs filled out and numerical?"
+                break;
+            case "2":
+                console.log("impropernum");
+                err.innerHTML = "Could not generate! Are inputs in the valid range?";
+                break;
+            default:
+                console.log("other");
+                err.innerHTML = "Could not generate! Something went wrong."
+                break;
+        }
+        btn.disabled = false;
     });
-}
 
+    let result = await promise;
 
-/**
- * Determine the type of array to generate
- */
-const changeType = () => {
-    if (randtype.checked) return 0;
-    else if (asctype.checked) return 1;
-    else if (desctype.checked) return 2;
-    else return 0;
+    if (result === "0") {
+        console.log("success");
+        btn.disabled = false;
+    }
 }
