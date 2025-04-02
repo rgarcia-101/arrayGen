@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Generator</title>
+    <script src="matrix.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <h2>Garcia101 Utility</h2>
+        <div class="navbar-content">
+            <ul class="navbar-nav" id="navbar-nav">
+                <li><a href="arrays.html">Array Generator</a></li>
+                <li><a href="trees.html">Binary Trees</a></li>
+                <li><a href="matrix.html">Matrix Trees</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="content">
+        <h1>Matrix Generator</h1>
+        <div class="inputbox">
+            <label for="lownum">From Number:</label>
+            <br>
+            <input class="numinput" type="number" pattern="[0-9]" max="2147483647" min="0" name="lownum" id="lownum">
+        </div>
+        <div class="inputbox">
+            <label for="highnum">To Number:</label>
+            <br>
+            <input class="numinput" type="number" pattern="[0-9]" max="2147483647" min="0" name="highnum" id="highnum">
+        </div>
+
+        <div class="inputbox">
+            <label for="length">Matrix Size</label>
+            <br>
+            <input class="numinput" type="number" pattern="[0-9]" max="2000000" min="0" name="length" id="length">
+        </div>
+        
+        <div class="inputbox">
+            <label for="ilength">Matrix[i] Size</label>
+            <br>
+            <input class="numinput" type="number" pattern="[0-9]" max="2000000" min="0" name="ilength" id="ilength">
+        </div>
+        <aside>Note: size of Matrix*Matrix[i] should not exceed 2000000!</aside>
+        <br>
+
+        <button id="generatebtn">Generate!</button>
+
+        <div class="responsivetext">
+            <p id="errortext"></p>
+            <p id="processtext"></p>
+        </div>
+
+        <h3>Output:</h3>
+        <div class="texts">
+            <textarea id="outputBox" placeholder="Array output here..."></textarea>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+    init();
+</script>
