@@ -1,6 +1,6 @@
 
 
-const navbarGen = () => {
+const headerGen = () => {
     let div = document.createElement("div");
     let list = document.querySelector("#navbar-nav")
 
