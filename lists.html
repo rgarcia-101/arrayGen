@@ -32,10 +32,18 @@
         </div>
 
         <div class="inputbox">
+            <p>Common Input Presets:</p>
+            <button type="button" onclick="presets('lowercase')">Lowercase Letters</button>
+            <button type="button" onclick="presets('uppercase')">Uppercase Letters</button>
+            <button type="button" onclick="presets('allLetters')">All Letters</button>
+        </div>
+
+        <div class="inputbox">
             <label for="length">Array Size</label>
             <br>
             <input class="numinput" type="number" pattern="[0-9]" max="2000000" min="0" name="length" id="length">
         </div>
+
         <button id="generatebtn">Generate!</button>
 
         <div class="responsivetext">
