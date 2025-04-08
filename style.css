@@ -26,7 +26,10 @@ body {
     height: 8em;
     width: 100%;
 }
-#outputBox {
+#input_texts textarea {
+    max-height: 100%;
+}
+.texts textarea {
     box-sizing: border-box;
     border: solid #8c8273 3px;
     margin: auto;
@@ -111,13 +114,14 @@ button:hover {
     align-items: baseline;
     list-style-type: none;
 }
+.navbar-nav li {
+
+    display: inline;
+    text-decoration: underline;
+    margin-right: 1em;
+}
 .navbar-content {
     margin-left: auto;
-}
-.navbar-nav li {
-    
-    display: inline;
-    margin-right: 6px;
 }
 .navbar-nav li a {
     color: white;

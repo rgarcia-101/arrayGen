@@ -16,10 +16,6 @@ svg text {
     text-align: center;
     width: 100%;
 }
-#tempbtn {
-    margin: auto;
-    text-align: center;
-}
 #hide-text {
     visibility: hidden;
 }
