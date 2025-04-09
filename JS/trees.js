@@ -9,6 +9,7 @@ let textarea;
 let lownum;
 let highnum;
 let chance;
+let refresh;
 let graphics;
 let process;
 let err;
@@ -24,6 +25,7 @@ const init = () => {
     graphics = document.querySelector("#visualizer");
     process = document.querySelector("#processtext");
     err = document.querySelector("#errortext");
+    refresh = document.querySelector("#refresh");
 
     // TODO update this
     // let temp = document.querySelector("#tempbtn");
@@ -31,7 +33,7 @@ const init = () => {
     btn.addEventListener("click", clicked);
 }
 
-
+// TODO refactor for refresh button
 async function clicked() {
     btn.disabled = true;
     err.innerHTML = "";

@@ -96,6 +96,15 @@ async function clicked() {
 }
 
 
+async function lorem() {
+    fetch().then(response => {
+
+    }).catch(err => {
+
+    });
+}
+
+
 
 const presets = (type) => {
     switch (type) {

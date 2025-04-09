@@ -75,7 +75,7 @@ async function clicked() {
                 low = parseInt(low);
                 high = parseInt(high);
                 length = parseInt(length);
-                if (((Math.abs(high - low) > MAX || high > MAX || low < (MAX * -1) || length > MAX)) || (low > high || length < 0)) {
+                if (((Math.abs(high - low) > MAX_INT || high > MAX_INT || low < (MAX_INT * -1) || length > MAX)) || (low > high || length < 0)) {
                     reject(Error("2"));
                     return;
                 } else {
