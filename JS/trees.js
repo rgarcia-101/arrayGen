@@ -2,6 +2,7 @@ const MAX = 12;
 const MAX_INT = 2147483647;
 const MAX_DEPTH = 19;
 let btn;
+let updateBtn;
 let output;
 let maxdepth;
 let mindepth;
@@ -16,6 +17,7 @@ let err;
 
 const init = () => {
     btn = document.querySelector("#btn");
+    updateBtn = document.querySelector("#refresh");
     maxdepth = document.querySelector("#maxDepth");
     mindepth = document.querySelector("#minDepth");
     textarea = document.querySelector("#outputBox");
@@ -31,119 +33,161 @@ const init = () => {
     // let temp = document.querySelector("#tempbtn");
 
     btn.addEventListener("click", clicked);
+    updateBtn.addEventListener("click", verifyUpdate);
 }
 
-// TODO refactor for refresh button
-async function clicked() {
+
+/**
+ * Handles generate button clicked
+ */
+const clicked = async () => {
     btn.disabled = true;
     err.innerHTML = "";
     process.innerHTML = "Generating...";
 
-    let promise = new Promise((resolve, reject) => {
-        process.innerHTML = "Generating...";
+    let result = await generate();
+    if (result === "0") {
+        btn.disabled = false;
+        console.log("all good");
+    } else {
+        // TODO something
+        console.log("Did not generate!");
+    }
+}
 
-        setTimeout(() => {
-            let depth = maxdepth.value;
-            let lowDepth = mindepth.value;
-            let low = lownum.value;
-            let high = highnum.value;
-            let childChance = chance.value;
-            if (depth === "" || childChance === "" || lowDepth === "" || high === "" || low === "") {
-                reject(Error("1"));
-                return;
-            }
-            else if (isNaN(depth) || isNaN(childChance) || isNaN(lowDepth) || isNaN(high) || isNaN(low)) {
-                reject(Error("2"));
-                return;
-            }
-            low = parseInt(low);
-            high = parseInt(high);
-            depth = parseInt(depth);
-            lowDepth = parseInt(lowDepth);
-            lowDepth = depth - lowDepth;
-            childChance = parseInt(childChance);
 
-            if (high > MAX_INT || low < (MAX_INT * -1) || high < low || depth < 1 || depth > MAX_DEPTH) {
-                reject(Error("3"));
-                return;
-            }
+/**
+ * Generates text and visual binary tree
+ * @returns promise
+ */
+const generate = async () => {
+    try {
+        return await new Promise((resolve, reject) => {
+            process.innerHTML = "Generating...";
 
-            let breadth = 1;
-            let next;
-            let res = [];
-            while (depth > 0 && breadth > 0) {
-                next = 0;
-                let guaranteeGen = false;
-                while (breadth > 0) {
-                    // Has not reached min depth, do check
-                    if (depth > lowDepth && (breadth == 1 && !guaranteeGen)) {
-                        res.push(Math.floor(Math.random() * (high - low + 1)) + low);
-                        next += 2;
-                    } else {
-                        let num = Math.floor(Math.random() * 100);
-                        if (num > childChance) {
-                            res.push("null");
-                        }
-                        else {
-                            guaranteeGen = true;
+            setTimeout(() => {
+                let depth = maxdepth.value;
+                let lowDepth = mindepth.value;
+                let low = lownum.value;
+                let high = highnum.value;
+                let childChance = chance.value;
+                if (depth === "" || childChance === "" || lowDepth === "" || high === "" || low === "") {
+                    reject(Error("1"));
+                    return;
+                }
+                else if (isNaN(depth) || isNaN(childChance) || isNaN(lowDepth) || isNaN(high) || isNaN(low)) {
+                    reject(Error("2"));
+                    return;
+                }
+                low = parseInt(low);
+                high = parseInt(high);
+                depth = parseInt(depth);
+                lowDepth = parseInt(lowDepth);
+                lowDepth = depth - lowDepth;
+                childChance = parseInt(childChance);
+
+                if (high > MAX_INT || low < (MAX_INT * -1) || high < low || depth < 1 || depth > MAX_DEPTH) {
+                    reject(Error("3"));
+                    return;
+                }
+
+                let breadth = 1;
+                let next;
+                let res = [];
+                while (depth > 0 && breadth > 0) {
+                    next = 0;
+                    let guaranteeGen = false;
+                    while (breadth > 0) {
+                        // Has not reached min depth, do check
+                        if (depth > lowDepth && (breadth == 1 && !guaranteeGen)) {
                             res.push(Math.floor(Math.random() * (high - low + 1)) + low);
                             next += 2;
+                        } else {
+                            let num = Math.floor(Math.random() * 100);
+                            if (num > childChance) {
+                                res.push("null");
+                            }
+                            else {
+                                guaranteeGen = true;
+                                res.push(Math.floor(Math.random() * (high - low + 1)) + low);
+                                next += 2;
+                            }
                         }
+                        breadth--;
                     }
-                    breadth--;
+                    breadth = next;
+                    depth--;
                 }
-                breadth = next;
-                depth--;
-            }
-            textarea.value = "[" + res + ']';
+                textarea.value = "[" + res + ']';
 
-            let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-            graphics.innerHTML = "";
-            if (width > 700 && res[0] != null) {
-                let lines = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                graphics.innerHTML = "";
+                if (width > 700 && res[0] != null) {
+                    let lines = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
-                lines.setAttributeNS(null, "id", "lines");
-                graphics.appendChild(lines);
-                let head = constructTree(res);
+                    lines.setAttributeNS(null, "id", "lines");
+                    graphics.appendChild(lines);
+                    let head = constructTree(res);
 
-                if (head != null) generateImage(0, 1, -1, -10, head);
-            }
+                    if (head != null) generateImage(0, 1, -1, -10, head);
+                }
 
-            process.innerHTML = "";
-            resolve("0");
+                process.innerHTML = "";
+                resolve("0");
 
-        }, 200);
-    }).catch(error => {
-        // TODO make errors display on view
+            }, 200);
+        });
+    } catch (error) {
+        // FIXME wrong errors displaying on view
         switch (error.message) {
             case "1":
                 console.log("empty");
-                err.innerHTML = "Could not generate! Are inputs numerical and non-blank?"
+                err.innerHTML = "Could not generate! Are inputs numerical and non-blank?";
                 break;
             case "2":
                 console.log("nan");
-                err.innerHTML = "Could not generate! Are inputs numerical and non-blank?"
+                err.innerHTML = "Could not generate! Are inputs numerical and non-blank?";
                 break;
             case "3":
                 console.log("value overload");
-                err.innerHTML = "Could not generate! Inputs are either too large or too small."
+                err.innerHTML = "Could not generate! Inputs are either too large or too small.";
                 break;
             default:
-                err.innerHTML = "Could not generate! Something went wrong."
+                err.innerHTML = "Could not generate! Something went wrong.";
                 console.log("how did this happen?");
                 break;
         }
         process.innerHTML = "";
         btn.disabled = false;
-    });
-
-    let result = await promise;
-    if (result === "0") {
-        // TODO display success on view
-        btn.disabled = false;
-        console.log("all good");
     }
 }
+
+
+
+/**
+ * Verifies the textarea input is valid before sending to generate
+ */
+const verifyUpdate = async () => {
+    // TODO rework into promise
+    graphics.innerHTML = "";
+    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (width > 700) {
+        let text = textarea.value;
+        if (text.length < 3 || text.charCodeAt(0) != 91 || text.charCodeAt(text.length-1) != 93) return;
+        text = text.substring(1, text.length-1);
+        let res = text.split(",");
+
+        let lines = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+        lines.setAttributeNS(null, "id", "lines");
+        graphics.appendChild(lines);
+        let head = constructTree(res);
+
+        if (head != null) generateImage(0, 1, -1, -10, head);
+    }
+}
+
+
 
 
 /**
@@ -155,10 +199,11 @@ async function clicked() {
  * @param {Node} node 
  * @returns 
  */
-let generateImage = (depth, pos, lastx, lasty, node) => {
+const generateImage = (depth, pos, lastx, lasty, node) => {
+    // TODO rework into promise?
     if (node === null || depth > 3) return;
     let w = Math.pow(2, depth) + 1;
-    let h = lasty + 20;
+    let h = lasty + 24;
     w = (100 / w) * pos;
 
     let bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -187,7 +232,8 @@ let generateImage = (depth, pos, lastx, lasty, node) => {
 
     text.setAttributeNS(null, "x", w + "%");
     text.setAttributeNS(null, "y", (h) + "%");
-    text.innerHTML = node.val;
+    let stringValue = node.val.toString();
+    text.innerHTML = stringValue.length <= 10 ? stringValue : stringValue.substring(0,10);
 
     graphics.appendChild(bg);
     graphics.appendChild(text);
@@ -205,8 +251,8 @@ let generateImage = (depth, pos, lastx, lasty, node) => {
         document.querySelector("#lines").appendChild(line);
     }
 
-    generateImage(depth + 1, (pos * 2) - 1, w, lasty + 20, node.left);
-    generateImage(depth + 1, pos * 2, w, lasty + 20, node.right);
+    generateImage(depth + 1, (pos * 2) - 1, w, lasty + 24, node.left);
+    generateImage(depth + 1, pos * 2, w, lasty + 24, node.right);
 }
 
 
@@ -216,11 +262,8 @@ let generateImage = (depth, pos, lastx, lasty, node) => {
  * @param {Array} list 
  * @returns Head of constructed tree
  */
-let constructTree = (list) => {
-
-    // TODO make this work with not just "proper" arrays
-    if (list.length % 2 == 0) return null;
-
+const constructTree = (list) => {
+    // TODO rework into promise?
 
     let queue = [];
     let head = new Node();
@@ -235,12 +278,14 @@ let constructTree = (list) => {
             temp.left = left;
             queue.push(left);
         }
-        if (list[i + 1] !== null && list[i + 1] !== "null") {
+        if (i+1 < list.length && list[i + 1] !== null && list[i + 1] !== "null") {
             let right = new Node();
             right.val = list[i + 1];
             temp.right = right;
             queue.push(right);
         }
+
+        if (queue.length == 0) break;
     }
 
     return head;
