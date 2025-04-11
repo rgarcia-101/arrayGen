@@ -31,7 +31,7 @@ const init = () => {
 /**
  * 
  */
-async function clicked() {
+const clicked = async () => {
     btn.disabled = true;
     err.innerHTML = "";
     process.innerHTML = "Generating...";
@@ -96,17 +96,29 @@ async function clicked() {
 }
 
 
-async function lorem() {
-    fetch().then(response => {
+const lorem = async () => {
+    
+    try {
+        let resp = await fetch('https://fakeapi.net/lorem');
+        if (!resp.ok) {
+            // error
+            throw new Error(`Status: ${resp.status}`);
+        }
+        let text = await resp.json();
+        text = (text['text']).split(' ');
 
-    }).catch(err => {
-
-    });
+        console.log(text);
+        console.log(resp);
+        return text;
+    } catch (err) {
+        return "no";
+    }
+    
 }
 
 
 
-const presets = (type) => {
+const presets = async (type) => {
     switch (type) {
         case "lowercase":
             inputtext.value = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
@@ -116,6 +128,9 @@ const presets = (type) => {
             break;
         case "allLetters":
             inputtext.value = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+            break;
+        case "lorem":
+            inputtext.value = await lorem();
             break;
     }
 }
