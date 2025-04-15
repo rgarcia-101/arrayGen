@@ -46,9 +46,17 @@ h1 {
     margin: auto;
     text-align: center;
 }
+h2 a {
+    text-decoration: none;
+    color: white;
+}
 .inputbox {
     margin: 1em 0 1em 0;
     width: 50%;
+}
+.inputbox button {
+    display: block;
+    margin-bottom: 1em;
 }
 #errortext {
     color: rgb(255, 91, 91);
@@ -85,6 +93,10 @@ button:hover {
     color: white;
 }
 
+button:disabled {
+    background-color: #d3d3d3;
+}
+
 .radiotext{
     display: inline-block;
     width: 15%;
@@ -112,24 +124,25 @@ button:hover {
     margin-right: 3em;
     justify-content: end;
     align-items: baseline;
+}
+li {
+    text-decoration: underline;
     list-style-type: none;
 }
-.navbar-nav li {
-
-    display: inline;
-    text-decoration: underline;
-    margin-right: 1em;
-}
-.navbar-content {
-    margin-left: auto;
-}
-.navbar-nav li a {
+li a {
     color: white;
     text-decoration: none;
     text-align: center;
 }
-.navbar-nav li a:hover {
+li a:hover {
     color: rgb(174, 175, 176);
     text-decoration: none;
     text-align: center;
+}
+.navbar-nav li {
+    display: inline;
+    margin-right: 1em;
+}
+.navbar-content {
+    margin-left: auto;
 }
