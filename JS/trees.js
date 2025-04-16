@@ -48,10 +48,10 @@ const clicked = async () => {
     let result = await generate();
     if (result === "0") {
         btn.disabled = false;
-        console.log("all good");
+        // console.log("all good");
     } else {
         // TODO something
-        console.log("Did not generate!");
+        // console.log("Did not generate!");
     }
 }
 
@@ -141,20 +141,20 @@ const generate = async () => {
         // FIXME wrong errors displaying on view
         switch (error.message) {
             case "1":
-                console.log("empty");
+                // console.log("empty");
                 err.innerHTML = "Could not generate! Are inputs numerical and non-blank?";
                 break;
             case "2":
-                console.log("nan");
+                // console.log("nan");
                 err.innerHTML = "Could not generate! Are inputs numerical and non-blank?";
                 break;
             case "3":
-                console.log("value overload");
+                // console.log("value overload");
                 err.innerHTML = "Could not generate! Inputs are either too large or too small.";
                 break;
             default:
                 err.innerHTML = "Could not generate! Something went wrong.";
-                console.log("how did this happen?");
+                // console.log("how did this happen?");
                 break;
         }
         process.innerHTML = "";

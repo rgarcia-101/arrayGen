@@ -72,15 +72,15 @@ const clicked = async () => {
         process.innerHTML = "";
         switch (error.message) {
             case "1":
-                console.log("nan/empty");
+                // console.log("nan/empty");
                 err.innerHTML = "Could not generate! Are inputs filled out and numerical?"
                 break;
             case "2":
-                console.log("impropernum");
+                // console.log("impropernum");
                 err.innerHTML = "Could not generate! Are inputs in the valid range?";
                 break;
             default:
-                console.log("other");
+                // console.log("other");
                 err.innerHTML = "Could not generate! Something went wrong."
                 break;
         }
@@ -90,7 +90,7 @@ const clicked = async () => {
     let result = await promise;
 
     if (result === "0") {
-        console.log("success");
+        // console.log("success");
         btn.disabled = false;
     }
 }
@@ -107,8 +107,6 @@ const lorem = async () => {
         let text = await resp.json();
         text = (text['text']).split(' ');
 
-        console.log(text);
-        console.log(resp);
         return text;
     } catch (err) {
         return "no";
