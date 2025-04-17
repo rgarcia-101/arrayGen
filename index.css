@@ -1,8 +1,13 @@
 .content ul {
-    margin: auto;
     text-align: center;
+    display: block;
+    padding: 0;
+    margin: 0;
 }
 .content li {
     margin-bottom: 1em;
     font-size: 1.5em;
+}
+.content {
+    text-align: center;
 }
