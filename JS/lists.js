@@ -7,6 +7,10 @@ let process;
 let lengthbox;
 let inputtext
 
+let arrType;
+let wordType;
+let stringType;
+
 
 
 /**
@@ -19,6 +23,10 @@ const init = () => {
     process = document.querySelector("#processtext");
     err = document.querySelector("#errortext");
     lengthbox = document.querySelector("#length");
+
+    arrType = document.querySelector("#array");
+    wordType = document.querySelector('#words');
+    stringType = document.querySelector('#string');
 
     lengthbox.placeholder = "Max " + MAX;
 
@@ -47,6 +55,9 @@ const clicked = async () => {
                 reject(Error("1"));
                 return;
             } else {
+                let type = 0;
+                if (wordType.checked) type = 1;
+                else if (stringType.checked) type = 2;
                 // TODO organize, break into functions
                 length = parseInt(length);
                 input = input.split(",")
@@ -55,16 +66,29 @@ const clicked = async () => {
                     return;
                 } else {
                     let inputSize = input.length;
-                    let temp = [];
-                    for (let i = 0; i < length; i++) {
-                        temp.push(input[Math.floor(Math.random()*inputSize)].trim());
+                    let output;
+                    if (type === 2) {
+                        output = "";
+                        for (let i = 0; i < length; i++) {
+                            output += input[Math.floor(Math.random() * inputSize)].trim();
+                        }
+                    } else if (type == 1) {
+                        output = "";
+                        for (let i = 0; i < length; i++) {
+                            output += input[Math.floor(Math.random() * inputSize)].trim() + " ";
+                        }
+                    } else {
+                        let temp = [];
+                        for (let i = 0; i < length; i++) {
+                            temp.push(input[Math.floor(Math.random() * inputSize)].trim());
+                        }
+                        output = "[" + temp.toString() + "]";
                     }
 
-
                     process.innerHTML = "";
-                    output = "[" + temp.toString() + "]";
+                    textarea.value = output;
                 }
-                textarea.value = output;
+                
                 resolve("0");
             }
         }, 200);
@@ -97,7 +121,7 @@ const clicked = async () => {
 
 
 const lorem = async () => {
-    
+
     try {
         let resp = await fetch('https://fakeapi.net/lorem');
         if (!resp.ok) {
@@ -111,7 +135,7 @@ const lorem = async () => {
     } catch (err) {
         return "no";
     }
-    
+
 }
 
 

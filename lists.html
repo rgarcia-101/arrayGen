@@ -45,6 +45,25 @@
             <input class="numinput" value="10" type="number" pattern="[0-9]" max="2000000" min="0" name="length" id="length">
         </div>
 
+        <div class="radiobox">
+            <div class="radiotext">
+                <label for="array">Format As Array</label>
+                <input type="radio" checked class="radio" type="0" name="arrtype" id="array">
+            </div>
+            <br>
+            <div class="radiotext">
+                <label for="words">Format As Words</label>
+                <input type="radio" class="radio" type="1" name="arrtype" id="words">
+            </div>
+
+            <br>
+            <div class="radiotext">
+                <label for="string">Format As Single String</label>
+                <input type="radio" class="radio" type="2" name="arrtype" id="string">
+            </div>
+        </div>
+
+        <br><br>
         <button id="generatebtn">Generate!</button>
 
         <div class="responsivetext">
