@@ -30,6 +30,10 @@ const init = () => {
 
     lengthbox.placeholder = "Max " + MAX;
 
+    lengthbox.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") clicked();
+    });
+
 
     btn.addEventListener("click", clicked);
 }
