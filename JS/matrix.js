@@ -92,6 +92,7 @@ async function clicked() {
 
                     for (let i = 0; i < length; i++) {
                         output += "[" + temp[i].toString() + "]";
+                        if (i != length-1) output += ","
                     }
                     process.innerHTML = "";
                     output = "[" + output + "]";
