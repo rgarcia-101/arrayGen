@@ -108,6 +108,16 @@ button:disabled {
     float: right;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
  /** NAVBAR **/
 .navbar {
     text-align: right;
