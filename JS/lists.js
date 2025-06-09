@@ -10,6 +10,7 @@ let inputtext
 let arrType;
 let wordType;
 let stringType;
+let addQuotes;
 
 
 
@@ -25,8 +26,9 @@ const init = () => {
     lengthbox = document.querySelector("#length");
 
     arrType = document.querySelector("#array");
-    wordType = document.querySelector('#words');
-    stringType = document.querySelector('#string');
+    wordType = document.querySelector("#words");
+    stringType = document.querySelector("#string");
+    addQuotes = document.querySelector("#addQuotes");
 
     lengthbox.placeholder = "Max " + MAX;
 
@@ -62,6 +64,7 @@ const clicked = async () => {
                 let type = 0;
                 if (wordType.checked) type = 1;
                 else if (stringType.checked) type = 2;
+                let quotes = addQuotes.checked;
                 // TODO organize, break into functions
                 length = parseInt(length);
                 input = input.split(",")
@@ -73,18 +76,26 @@ const clicked = async () => {
                     let output;
                     if (type === 2) {
                         output = "";
+                        if (quotes) output += '"';
                         for (let i = 0; i < length; i++) {
                             output += input[Math.floor(Math.random() * inputSize)].trim();
                         }
+                        if (quotes) output += '"';
                     } else if (type == 1) {
                         output = "";
                         for (let i = 0; i < length; i++) {
-                            output += input[Math.floor(Math.random() * inputSize)].trim() + " ";
+                            if (quotes) 
+                                output += '"' + input[Math.floor(Math.random() * inputSize)].trim() + '" ';
+                            else 
+                                output += input[Math.floor(Math.random() * inputSize)].trim() + " ";
+
                         }
                     } else {
                         let temp = [];
                         for (let i = 0; i < length; i++) {
-                            temp.push(input[Math.floor(Math.random() * inputSize)].trim());
+                            if (quotes) temp.push('"' + input[Math.floor(Math.random() * inputSize)].trim() + '"');
+                            else 
+                                temp.push(input[Math.floor(Math.random() * inputSize)].trim());
                         }
                         output = "[" + temp.toString() + "]";
                     }
@@ -92,7 +103,7 @@ const clicked = async () => {
                     process.innerHTML = "";
                     textarea.value = output;
                 }
-                
+
                 resolve("0");
             }
         }, 200);

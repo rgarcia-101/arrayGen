@@ -6,6 +6,7 @@ let inputtext;
 let process;
 let lengthbox;
 let ilengthbox;
+let addQuotes;
 
 
 
@@ -20,6 +21,7 @@ const init = () => {
     err = document.querySelector("#errortext");
     lengthbox = document.querySelector("#length");
     ilengthbox = document.querySelector("#ilength");
+    addQuotes = document.querySelector("#addQuotes");
 
     lengthbox.placeholder = "Max " + MAX;
     ilengthbox.placeholder = "Max " + MAX;
@@ -56,6 +58,7 @@ async function clicked() {
                 reject(Error("1"));
                 return;
             } else {
+                let quotes = addQuotes.checked;
                 let input = inputtext.value;
                 length = parseInt(length);
                 ilength = parseInt(ilength);
@@ -69,14 +72,18 @@ async function clicked() {
                     input = input.split(",");
                     let inputSize = input.length;
                     let temp = [];
+
+                    // TODO 
                     for (let i = 0; i < length; i++) {
                         temp.push([]);
                         temp[i].push(new Array(ilength));
                     }
                     for (let i = 0; i < length; i++) {
                         for (let j = 0; j < ilength; j++) {
-                            temp[i][j] = input[Math.floor(Math.random() * inputSize)].trim();
-                            // temp[i][j] = Math.floor(Ma/th.random() * (high - low + 1)) + low
+                            if (quotes)
+                                temp[i][j] = '"' + input[Math.floor(Math.random() * inputSize)].trim() + '"';
+                            else 
+                                temp[i][j] = input[Math.floor(Math.random() * inputSize)].trim();
                         }
                     }
 
