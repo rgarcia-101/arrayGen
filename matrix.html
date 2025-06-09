@@ -12,55 +12,60 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <h2><a href="index.html">G101 Utility</a></h2>
-        <div class="navbar-content">
-            <ul class="navbar-nav" id="navbar-nav">
-                <noscript>Please enable JavaScript for this site to function properly!</noscript>
-            </ul>
-        </div>
-    </nav>
-    <br>
-    <div class="content">
-        <h1>Matrix Generator</h1>
-        <div class="inputbox">
-            <label for="lownum">From Number:</label>
-            <br>
-            <input class="numinput" value="1" type="number" pattern="[0-9]" max="2147483647" min="0" name="lownum" id="lownum">
-        </div>
-        <div class="inputbox">
-            <label for="highnum">To Number:</label>
-            <br>
-            <input class="numinput" value="10" type="number" pattern="[0-9]" max="2147483647" min="0" name="highnum" id="highnum">
-        </div>
-
-        <div class="inputbox">
-            <label for="length">Matrix Size</label>
-            <br>
-            <input class="numinput" value="5" type="number" pattern="[0-9]" max="2000000" min="0" name="length" id="length">
-        </div>
-        
-        <div class="inputbox">
-            <label for="ilength">Matrix[i] Size</label>
-            <br>
-            <input class="numinput" value="2" type="number" pattern="[0-9]" max="2000000" min="0" name="ilength" id="ilength">
-        </div>
-        <aside>Note: size of Matrix*Matrix[i] should not exceed 2000000!</aside>
+    <main>
+        <nav class="navbar">
+            <h2><a href="index.html">G101 Utility</a></h2>
+            <div class="navbar-content">
+                <ul class="navbar-nav" id="navbar-nav">
+                    <noscript>Please enable JavaScript for this site to function properly!</noscript>
+                </ul>
+            </div>
+        </nav>
         <br>
+        <div class="content">
+            <h1>Matrix Generator</h1>
+            <div class="inputbox">
+                <label for="lownum">From Number:</label>
+                <br>
+                <input class="numinput" value="1" type="number" pattern="[0-9]" max="2147483647" min="0" name="lownum"
+                    id="lownum">
+            </div>
+            <div class="inputbox">
+                <label for="highnum">To Number:</label>
+                <br>
+                <input class="numinput" value="10" type="number" pattern="[0-9]" max="2147483647" min="0" name="highnum"
+                    id="highnum">
+            </div>
 
-        <button id="generatebtn">Generate!</button>
+            <div class="inputbox">
+                <label for="length">Matrix Size</label>
+                <br>
+                <input class="numinput" value="5" type="number" pattern="[0-9]" max="2000000" min="0" name="length"
+                    id="length">
+            </div>
 
-        <div class="responsivetext">
-            <p id="errortext"></p>
-            <p id="processtext"></p>
+            <div class="inputbox">
+                <label for="ilength">Matrix[i] Size</label>
+                <br>
+                <input class="numinput" value="2" type="number" pattern="[0-9]" max="2000000" min="0" name="ilength"
+                    id="ilength">
+            </div>
+            <aside>Note: size of Matrix*Matrix[i] should not exceed 2000000!</aside>
+            <br>
+
+            <button id="generatebtn">Generate!</button>
+
+            <div class="responsivetext">
+                <p id="errortext"></p>
+                <p id="processtext"></p>
+            </div>
+
+            <h3>Output:</h3>
+            <div class="texts">
+                <textarea id="outputBox" placeholder="Array output here..."></textarea>
+            </div>
         </div>
-
-        <h3>Output:</h3>
-        <div class="texts">
-            <textarea id="outputBox" placeholder="Array output here..."></textarea>
-        </div>
-    </div>
-
+    </main>
 
 
 </body>

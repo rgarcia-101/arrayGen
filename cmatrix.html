@@ -12,56 +12,59 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <h2><a href="index.html">G101 Utility</a></h2>
-        <div class="navbar-content">
-            <ul class="navbar-nav" id="navbar-nav">
-                <noscript>Please enable JavaScript for this site to function properly!</noscript>
-            </ul>
-        </div>
-    </nav>
-    <br>
-    <div class="content">
-        <h1>Custom Matrix Generator</h1>
-        <div class="inputbox">
-            <label for="inBox">Comma Separated List of Inputs</label>
-        </div>
-        
-        <div class="texts" id="input_texts">
-            <textarea id="inBox" placeholder="Comma separated input here..."></textarea>
+    <main>
+        <nav class="navbar">
+            <h2><a href="index.html">G101 Utility</a></h2>
+            <div class="navbar-content">
+                <ul class="navbar-nav" id="navbar-nav">
+                    <noscript>Please enable JavaScript for this site to function properly!</noscript>
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <div class="content">
+            <h1>Custom Matrix Generator</h1>
+            <div class="inputbox">
+                <label for="inBox">Comma Separated List of Inputs</label>
+            </div>
+
+            <div class="texts" id="input_texts">
+                <textarea id="inBox" placeholder="Comma separated input here..."></textarea>
+            </div>
+
+            <div class="inputbox">
+                <label for="length">Matrix Size</label>
+                <br>
+                <input class="numinput" value="5" type="number" pattern="[0-9]" max="2000000" min="0" name="length"
+                    id="length">
+            </div>
+
+            <div class="inputbox">
+                <label for="ilength">Matrix[i] Size</label>
+                <br>
+                <input class="numinput" value="2" type="number" pattern="[0-9]" max="2000000" min="0" name="ilength"
+                    id="ilength">
+            </div>
+            <aside>Note: size of Matrix*Matrix[i] should not exceed 2000000!</aside>
+            <div class="inputbox">
+                <label for="addQuotes">Include Quotation Marks</label>
+                <input type="checkbox" name="addQuotes" id="addQuotes">
+            </div>
+
+            <button id="generatebtn">Generate!</button>
+
+            <div class="responsivetext">
+                <p id="errortext"></p>
+                <p id="processtext"></p>
+            </div>
+
+            <h3>Output:</h3>
+            <div class="texts">
+                <textarea id="outputBox" placeholder="Array output here..."></textarea>
+            </div>
         </div>
 
-        <div class="inputbox">
-            <label for="length">Matrix Size</label>
-            <br>
-            <input class="numinput" value="5" type="number" pattern="[0-9]" max="2000000" min="0" name="length" id="length">
-        </div>
-        
-        <div class="inputbox">
-            <label for="ilength">Matrix[i] Size</label>
-            <br>
-            <input class="numinput" value="2" type="number" pattern="[0-9]" max="2000000" min="0" name="ilength" id="ilength">
-        </div>
-        <aside>Note: size of Matrix*Matrix[i] should not exceed 2000000!</aside>
-        <div class="inputbox">
-            <label for="addQuotes">Include Quotation Marks</label>
-            <input type="checkbox" name="addQuotes" id="addQuotes">
-        </div>
-
-        <button id="generatebtn">Generate!</button>
-
-        <div class="responsivetext">
-            <p id="errortext"></p>
-            <p id="processtext"></p>
-        </div>
-
-        <h3>Output:</h3>
-        <div class="texts">
-            <textarea id="outputBox" placeholder="Array output here..."></textarea>
-        </div>
-    </div>
-
-
+    </main>
 
 </body>
 

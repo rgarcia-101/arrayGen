@@ -13,83 +13,83 @@
 </head>
 
 <body>
-
-    <nav class="navbar">
+    <main>
+        <nav class="navbar">
             <h2><a href="index.html">G101 Utility</a></h2>
             <div class="navbar-content">
                 <ul class="navbar-nav" id="navbar-nav">
                     <noscript>Please enable JavaScript for this site to function properly!</noscript>
                 </ul>
             </div>
-    </nav>
-
-    <br>
-    <div class="content">
-        <h1>Binary Tree Generator</h1>
-        <div class="inputbox">
-            <label for="minDepth">Min Depth:</label>
-            <br>
-            <input class="numinput" type="number" value="0" pattern="[0-9]" max="16" min="0" name="minDepth"
-                id="minDepth">
-        </div>
-        <div class="inputbox">
-            <label for="maxDepth">Max Depth:</label>
-            <br>
-            <input class="numinput" type="number" value="1" pattern="[0-9]" max="16" min="0" name="maxDepth"
-                id="maxDepth">
-        </div>
-        <br>
-        <div class="inputbox">
-            <label for="lownum">From Number:</label>
-            <br>
-            <input class="numinput" type="number" value="0" pattern="[0-9]" max="2147483647" min="0" name="lownum"
-                id="lownum">
-        </div>
-        <div class="inputbox">
-            <label for="highnum">To Number:</label>
-            <br>
-            <input class="numinput" type="number" value="1" pattern="[0-9]" max="2147483647" min="0" name="highnum"
-                id="highnum">
-        </div>
-        <br>
-        <div class="inputbox">
-            <label for="chance">Chance for Child Node:</label>
-            <br>
-            <input class="numinput" type="number" value="100" pattern="[0-9]" max="100" min="0" name="chance"
-                id="chance">
-        </div>
-
-        <button name="btn" id="btn">Generate!</button>
-
-
-
-        <div class="responsivetext">
-            <p id="errortext"></p>
-            <p id="processtext"></p>
-        </div>
-
-        <p id="output"></p>
-        <h3>Output:</h3>
-        <div class="texts">
-            <textarea id="outputBox" placeholder="Array output here..."></textarea>
-        </div>
+        </nav>
 
         <br>
-        <h3>Visual Preview:</h3>
-        <p>(Trees deeper than 4 levels will be truncated)</p>
+        <div class="content">
+            <h1>Binary Tree Generator</h1>
+            <div class="inputbox">
+                <label for="minDepth">Min Depth:</label>
+                <br>
+                <input class="numinput" type="number" value="0" pattern="[0-9]" max="16" min="0" name="minDepth"
+                    id="minDepth">
+            </div>
+            <div class="inputbox">
+                <label for="maxDepth">Max Depth:</label>
+                <br>
+                <input class="numinput" type="number" value="1" pattern="[0-9]" max="16" min="0" name="maxDepth"
+                    id="maxDepth">
+            </div>
+            <br>
+            <div class="inputbox">
+                <label for="lownum">From Number:</label>
+                <br>
+                <input class="numinput" type="number" value="0" pattern="[0-9]" max="2147483647" min="0" name="lownum"
+                    id="lownum">
+            </div>
+            <div class="inputbox">
+                <label for="highnum">To Number:</label>
+                <br>
+                <input class="numinput" type="number" value="1" pattern="[0-9]" max="2147483647" min="0" name="highnum"
+                    id="highnum">
+            </div>
+            <br>
+            <div class="inputbox">
+                <label for="chance">Chance for Child Node:</label>
+                <br>
+                <input class="numinput" type="number" value="100" pattern="[0-9]" max="100" min="0" name="chance"
+                    id="chance">
+            </div>
 
-        <p id="hide-text">Tree visualizer is not available on smaller screens!</p>
-        <button id="refresh">Refresh Preview</button>
-        <br><br>
+            <button name="btn" id="btn">Generate!</button>
 
-        <div class="graphics">
-            <svg width="100%" height="800" id="visualizer">
 
-            </svg>
+
+            <div class="responsivetext">
+                <p id="errortext"></p>
+                <p id="processtext"></p>
+            </div>
+
+            <p id="output"></p>
+            <h3>Output:</h3>
+            <div class="texts">
+                <textarea id="outputBox" placeholder="Array output here..."></textarea>
+            </div>
+
+            <br>
+            <h3>Visual Preview:</h3>
+            <p>(Trees deeper than 4 levels will be truncated)</p>
+
+            <p id="hide-text">Tree visualizer is not available on smaller screens!</p>
+            <button id="refresh">Refresh Preview</button>
+            <br><br>
+
+            <div class="graphics">
+                <svg width="100%" height="800" id="visualizer">
+
+                </svg>
+            </div>
+
         </div>
-
-    </div>
-
+    </main>
 
 </body>
 

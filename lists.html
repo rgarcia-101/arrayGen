@@ -12,80 +12,82 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <h2><a href="index.html">G101 Utility</a></h2>
-        <div class="navbar-content">
-            <ul class="navbar-nav" id="navbar-nav">
-                <noscript>Please enable JavaScript for this site to function properly!</noscript>
-            </ul>
-        </div>
-    </nav>
-    <br>
-    <div class="content">
-        <h1>Custom Array Generator</h1>
-
-
-        <div class="inputbox">
-            <label for="inBox">Comma Separated List of Inputs</label>
-        </div>
-        
-        <div class="texts" id="input_texts">
-            <textarea id="inBox" placeholder="Comma separated input here..."></textarea>
-        </div>
-
-        <div class="inputbox">
-            <p>Input Presets:</p>
-            <button type="button" onclick="presets('lowercase')">Lowercase Letters</button>
-            <button type="button" onclick="presets('uppercase')">Uppercase Letters</button>
-            <button type="button" onclick="presets('allLetters')">All Letters</button>
-            <button type="button" onclick="presets('lorem')">Random Lorem Ipsum</button>
-        </div>
-        <!-- TODO add option for "double" or 'single' quotes -->
-
-        <div class="inputbox">
-            <label for="length">Array Size</label>
-            <br>
-            <input class="numinput" value="10" type="number" pattern="[0-9]" max="2000000" min="0" name="length" id="length">
-        </div>
-
-        <div class="radiobox">
-            <div class="radiotext">
-                <label for="array">Format As Array</label>
-                <input type="radio" checked class="radio" type="0" name="arrtype" id="array">
+    <main>
+        <nav class="navbar">
+            <h2><a href="index.html">G101 Utility</a></h2>
+            <div class="navbar-content">
+                <ul class="navbar-nav" id="navbar-nav">
+                    <noscript>Please enable JavaScript for this site to function properly!</noscript>
+                </ul>
             </div>
-            <br>
-            <div class="radiotext">
-                <label for="words">Format As Words</label>
-                <input type="radio" class="radio" type="1" name="arrtype" id="words">
+        </nav>
+        <br>
+        <div class="content">
+            <h1>Custom Array Generator</h1>
+
+
+            <div class="inputbox">
+                <label for="inBox">Comma Separated List of Inputs</label>
             </div>
 
-            <br>
-            <div class="radiotext">
-                <label for="string">Format As Single String</label>
-                <input type="radio" class="radio" type="2" name="arrtype" id="string">
+            <div class="texts" id="input_texts">
+                <textarea id="inBox" placeholder="Comma separated input here..."></textarea>
+            </div>
+
+            <div class="inputbox">
+                <p>Input Presets:</p>
+                <button type="button" onclick="presets('lowercase')">Lowercase Letters</button>
+                <button type="button" onclick="presets('uppercase')">Uppercase Letters</button>
+                <button type="button" onclick="presets('allLetters')">All Letters</button>
+                <button type="button" onclick="presets('lorem')">Random Lorem Ipsum</button>
+            </div>
+            <!-- TODO add option for "double" or 'single' quotes -->
+
+            <div class="inputbox">
+                <label for="length">Array Size</label>
+                <br>
+                <input class="numinput" value="10" type="number" pattern="[0-9]" max="2000000" min="0" name="length"
+                    id="length">
+            </div>
+
+            <div class="radiobox">
+                <div class="radiotext">
+                    <label for="array">Format As Array</label>
+                    <input type="radio" checked class="radio" type="0" name="arrtype" id="array">
+                </div>
+                <br>
+                <div class="radiotext">
+                    <label for="words">Format As Words</label>
+                    <input type="radio" class="radio" type="1" name="arrtype" id="words">
+                </div>
+
+                <br>
+                <div class="radiotext">
+                    <label for="string">Format As Single String</label>
+                    <input type="radio" class="radio" type="2" name="arrtype" id="string">
+                </div>
+            </div>
+            <div class="inputbox">
+                <label for="addQuotes">Include Quotation Marks</label>
+                <input type="checkbox" name="addQuotes" id="addQuotes">
+            </div>
+
+
+            <br><br>
+            <button id="generatebtn">Generate!</button>
+
+            <div class="responsivetext">
+                <p id="errortext"></p>
+                <p id="processtext"></p>
+            </div>
+
+            <h3>Output:</h3>
+            <div class="texts">
+                <textarea id="outputBox" placeholder="Array output here..."></textarea>
             </div>
         </div>
-        <div class="inputbox">
-            <label for="addQuotes">Include Quotation Marks</label>
-            <input type="checkbox" name="addQuotes" id="addQuotes">
-        </div>
-        
 
-        <br><br>
-        <button id="generatebtn">Generate!</button>
-
-        <div class="responsivetext">
-            <p id="errortext"></p>
-            <p id="processtext"></p>
-        </div>
-
-        <h3>Output:</h3>
-        <div class="texts">
-            <textarea id="outputBox" placeholder="Array output here..."></textarea>
-        </div>
-    </div>
-
-
+    </main>
 
 </body>
 
