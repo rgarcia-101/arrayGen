@@ -15,6 +15,10 @@ body {
     margin: auto;
     color: white;
 }
+main {
+    padding-bottom: 10%;
+    min-height: 80%;
+}
 .content {
     margin-left: 1em;
     margin-right: 1em;
@@ -144,6 +148,17 @@ input[type="number"] {
 }
 .navbar-content {
     margin-left: auto;
+}
+
+/** FOOTER **/
+footer {
+    border-top: 2px solid gray;
+    background-color: #333b3e;
+    min-height: 50px;
+    text-align: right;
+}
+footer aside {
+    
 }
 
 /** LISTS **/
