@@ -45,7 +45,20 @@
                 <input class="numinput" value="2" type="number" pattern="[0-9]" max="2000000" min="0" name="ilength"
                     id="ilength">
             </div>
+
             <aside>Note: size of Matrix*Matrix[i] should not exceed 2000000!</aside>
+
+            <div class="radiobox">
+                <div class="radiotext">
+                    <label for="array">Format As Array</label>
+                    <input type="radio" checked class="radio" type="0" name="arrtype" id="array">
+                </div>
+                <br>
+                <div class="radiotext">
+                    <label for="words">Format As Words</label>
+                    <input type="radio" class="radio" type="1" name="arrtype" id="words">
+                </div>
+            </div>
             <div class="inputbox">
                 <label for="addQuotes">Include Quotation Marks</label>
                 <input type="checkbox" name="addQuotes" id="addQuotes">

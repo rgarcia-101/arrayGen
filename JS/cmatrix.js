@@ -7,6 +7,8 @@ let process;
 let lengthbox;
 let ilengthbox;
 let addQuotes;
+let arrType;
+let wordType;
 
 
 
@@ -22,6 +24,8 @@ const init = () => {
     lengthbox = document.querySelector("#length");
     ilengthbox = document.querySelector("#ilength");
     addQuotes = document.querySelector("#addQuotes");
+    arrType = document.querySelector("#array");
+    wordType = document.querySelector("#words");
 
     lengthbox.placeholder = "Max " + MAX;
     ilengthbox.placeholder = "Max " + MAX;
@@ -69,30 +73,47 @@ async function clicked() {
                 } else {
 
                     // TODO optimize this?
+                    let type = 0;
+                    if (wordType.checked) type = 1;
                     input = input.split(",");
                     let inputSize = input.length;
                     let temp = [];
-
                     // TODO 
-                    for (let i = 0; i < length; i++) {
-                        temp.push([]);
-                        temp[i].push(new Array(ilength));
-                    }
-                    for (let i = 0; i < length; i++) {
-                        for (let j = 0; j < ilength; j++) {
-                            if (quotes)
-                                temp[i][j] = '"' + input[Math.floor(Math.random() * inputSize)].trim() + '"';
-                            else 
-                                temp[i][j] = input[Math.floor(Math.random() * inputSize)].trim();
+
+                    if (type == 0) {
+                        for (let i = 0; i < length; i++) {
+                            temp.push([]);
+                            temp[i].push(new Array(ilength));
+                        }
+                        for (let i = 0; i < length; i++) {
+                            for (let j = 0; j < ilength; j++) {
+                                if (quotes)
+                                    temp[i][j] = '"' + input[Math.floor(Math.random() * inputSize)].trim() + '"';
+                                else
+                                    temp[i][j] = input[Math.floor(Math.random() * inputSize)].trim();
+                            }
+                        }
+
+                        for (let i = 0; i < length; i++) {
+                            output += "[" + temp[i].toString() + "]";
+                            if (i != length - 1) output += ",";
                         }
                     }
-
-                    for (let i = 0; i < length; i++) {
-                        output += "[" + temp[i].toString() + "]";
-                        if (i != length-1) output += ",";
+                    else {
+                        for (let i = 0; i < length; i++) {
+                            let word = quotes ? '"' : "";
+                            for (let j = 0; j < ilength; j++) {
+                                word += input[Math.floor(Math.random() * inputSize)].trim();
+                            }
+                            if (quotes) word += '"';
+                            temp.push(word);
+                        }
+                        output = temp.toString();
                     }
+
+                    if (type == 0) output = "[" + output + "]";
                     process.innerHTML = "";
-                    output = "[" + output + "]";
+                    // output = "[" + output + "]";
                 }
                 textarea.value = output;
                 resolve("0");
