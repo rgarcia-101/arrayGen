@@ -142,3 +142,36 @@ async function clicked() {
         btn.disabled = false;
     }
 }
+
+const lorem = async () => {
+    try {
+        let resp = await fetch('https://fakeapi.net/lorem');
+        if (!resp.ok) {
+            // error
+            throw new Error(`Status: ${resp.status}`);
+        }
+        let text = await resp.json();
+        text = (text['text']).split(' ');
+
+        return text;
+    } catch (err) {
+        return "no";
+    }
+}
+
+const presets = async (type) => {
+    switch (type) {
+        case "lowercase":
+            inputtext.value = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
+            break;
+        case "uppercase":
+            inputtext.value = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+            break;
+        case "allLetters":
+            inputtext.value = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+            break;
+        case "lorem":
+            inputtext.value = await lorem();
+            break;
+    }
+}

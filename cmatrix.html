@@ -33,6 +33,14 @@
             </div>
 
             <div class="inputbox">
+                <p>Input Presets:</p>
+                <button type="button" onclick="presets('lowercase')">Lowercase Letters</button>
+                <button type="button" onclick="presets('uppercase')">Uppercase Letters</button>
+                <button type="button" onclick="presets('allLetters')">All Letters</button>
+                <button type="button" onclick="presets('lorem')">Random Lorem Ipsum</button>
+            </div>
+
+            <div class="inputbox">
                 <label for="length">Matrix Size</label>
                 <br>
                 <input class="numinput" value="5" type="number" pattern="[0-9]" max="2000000" min="0" name="length"

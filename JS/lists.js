@@ -136,7 +136,6 @@ const clicked = async () => {
 
 
 const lorem = async () => {
-
     try {
         let resp = await fetch('https://fakeapi.net/lorem');
         if (!resp.ok) {
@@ -150,7 +149,6 @@ const lorem = async () => {
     } catch (err) {
         return "no";
     }
-
 }
 
 
