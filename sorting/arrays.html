@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Sorter</title>
+    <link rel="icon" href="../images/favicon.png" type="image/png">
+    <script src="../JS/arraySort.js"></script>
+    <script src="../JS/startup.js"></script>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <main>
+        <nav class="navbar">
+            <h2><a href="../index.html">G101 Utility</a></h2>
+            <div class="navbar-content">
+                <ul class="navbar-nav" id="navbar-nav">
+                    <noscript>Please enable JavaScript for this site to function properly!</noscript>
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <div class="content">
+            <h1>Array Sorter</h1>
+
+            <div class="inputbox">
+                <p>Type of array:</p>
+                <div class="radiobox">
+                    <div class="radiotext">
+                        <label for="asc">Ascending</label>
+                        <input type="radio" class="radio" type="0" name="arrtype" id="asc">
+                    </div>
+
+                    <br>
+                    <div class="radiotext">
+                        <label for="desc">Descending</label>
+                        <input type="radio" class="radio" type="1" name="arrtype" id="desc">
+                    </div>
+
+                </div>
+
+            </div>
+            <button id="generatebtn">Sort!</button>
+
+            <div class="responsivetext">
+                <p id="errortext"></p>
+                <p id="processtext"></p>
+            </div>
+
+            <h3>Output:</h3>
+            <div class="texts">
+                <textarea id="outputBox" placeholder="Array output here..."></textarea>
+            </div>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+    init();
+    headerGen();
+</script>

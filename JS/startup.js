@@ -18,19 +18,19 @@ const headerGen = () => {
     let lists = document.createElement("a");
     let cmatrix = document.createElement("a");
 
-    arrays.href = "arrays.html";
+    arrays.href = "/arrays.html";
     arrays.innerHTML = "Array Generator";
 
-    matrices.href = "matrix.html";
+    matrices.href = "/matrix.html";
     matrices.innerHTML = "Matrix Generator";
 
-    trees.href = "trees.html";
+    trees.href = "/trees.html";
     trees.innerHTML = "Binary Trees";
 
-    lists.href = "lists.html"
+    lists.href = "/lists.html"
     lists.innerHTML = "Custom Array"
 
-    cmatrix.href = "cmatrix.html";
+    cmatrix.href = "/cmatrix.html";
     cmatrix.innerHTML = "Custom Matrix";
 
 
