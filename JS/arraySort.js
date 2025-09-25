@@ -62,7 +62,12 @@ const generate = async () => {
                         return;
                     } else arr.push(num);
                 });
-                arr.sort((a, b) => a - b);
+                if (desctype.checked) {
+                    arr.sort((a, b) => b - a);
+                } else {
+                    arr.sort((a, b) => a - b);
+                }
+                
                 process.innerHTML = "";
                 textarea.value = "[" + arr.toString() + "]";
 
