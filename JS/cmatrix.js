@@ -9,6 +9,7 @@ let ilengthbox;
 let addQuotes;
 let arrType;
 let wordType;
+let stringType;
 
 
 
@@ -26,6 +27,7 @@ const init = () => {
     addQuotes = document.querySelector("#addQuotes");
     arrType = document.querySelector("#array");
     wordType = document.querySelector("#words");
+    stringType = document.querySelector("#strings")
 
     lengthbox.placeholder = "Max " + MAX;
     ilengthbox.placeholder = "Max " + MAX;
@@ -75,12 +77,39 @@ async function clicked() {
                     // TODO optimize this?
                     let type = 0;
                     if (wordType.checked) type = 1;
+                    else if (stringType.checked) type = 2;
                     input = input.split(",");
                     let inputSize = input.length;
-                    let temp = [];
-                    // TODO 
 
-                    if (type == 0) {
+                    if (type == 1) {
+                        // Strings format
+                        let temp = "";
+                        for (let i = 0; i < length; i++) {
+                            let word = quotes ? '"' : "";
+                            for (let j = 0; j < ilength; j++) {
+                                word += input[Math.floor(Math.random() * inputSize)].trim();
+                            }
+                            if (quotes) word += '"';
+                            temp += word;
+                            if (i != length - 1) temp += " ";
+                        }
+                        output = temp;
+                    } else if (type == 2) {
+                        // Words format
+                        let temp = [];
+                        for (let i = 0; i < length; i++) {
+                            let word = quotes ? '"' : "";
+                            for (let j = 0; j < ilength; j++) {
+                                word += input[Math.floor(Math.random() * inputSize)].trim();
+                            }
+                            if (quotes) word += '"';
+                            temp.push(word);
+                        }
+                        output = temp.toString();
+                    }
+                    else {
+                        // Matrix format
+                        let temp = [];
                         for (let i = 0; i < length; i++) {
                             temp.push([]);
                             temp[i].push(new Array(ilength));
@@ -98,17 +127,6 @@ async function clicked() {
                             output += "[" + temp[i].toString() + "]";
                             if (i != length - 1) output += ",";
                         }
-                    }
-                    else {
-                        for (let i = 0; i < length; i++) {
-                            let word = quotes ? '"' : "";
-                            for (let j = 0; j < ilength; j++) {
-                                word += input[Math.floor(Math.random() * inputSize)].trim();
-                            }
-                            if (quotes) word += '"';
-                            temp.push(word);
-                        }
-                        output = temp.toString();
                     }
 
                     if (type == 0) output = "[" + output + "]";
