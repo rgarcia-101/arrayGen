@@ -45,8 +45,8 @@ const generate = async () => {
         return await new Promise((resolve, reject) => {
             setTimeout(() => {
                 let input = textarea.value;
-                if (input.length > 100000) {
-                    reject(Error("3"));
+                if (input.length > 500000) {
+                    reject(Error("2"));
                     return;
                 }
                 // TODO do this better
@@ -58,7 +58,7 @@ const generate = async () => {
                 inputArr.forEach(i => {
                     let num = Number(i.trim());
                     if (isNaN(num)) {
-                        reject(Error("2"));
+                        reject(Error("1"));
                         return;
                     } else arr.push(num);
                 });
@@ -67,16 +67,32 @@ const generate = async () => {
                 } else {
                     arr.sort((a, b) => a - b);
                 }
-                
+
                 process.innerHTML = "";
                 textarea.value = "[" + arr.toString() + "]";
 
                 resolve("0");
             }, 200);
+        }).catch(error => {
+            process.innerHTML = "";
+            switch (error.message) {
+                case "1":
+                    err.innerHTML = "Could not generate! Are inputs filled out and numerical?"
+                    break;
+                case "2":
+                    err.innerHTML = "Could not generate! Is the input too large?";
+                    break;
+                default:
+                    err.innerHTML = "Could not generate! Something went wrong."
+                    break;
+            }
         });
     } catch (error) {
-        process.innerHTML = "";
+
+        switch (error.message) {
+
+        }
         err.innerHTML = "Could not sort!";
-        console.log(error.message);
+
     }
 }
